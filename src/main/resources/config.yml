@@ -1,0 +1,10 @@
+DefaultHomes: 0
+# Map permission nodes to additional home amount.
+AdditionalHomes:
+  group.friendly: 1
+  group.member: 2
+BlacklistedWorlds:
+- Resource
+- Resource_nether
+- Resource_the_end
+- Clubhouse

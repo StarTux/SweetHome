@@ -1,0 +1,74 @@
+name: SweetHome
+description: Home Plugin
+author: StarTux
+version: 0.1
+main: com.winthier.sweet_home.SweetHomePlugin
+depend: [ GenericEvents, PlayerCache ]
+commands:
+  home:
+    permission: sweethome.home
+    usage: |-
+      Usage:
+      /home - Visit default home
+      /home <name> - Visit named home
+  home:
+    permission: sweethome.home
+    usage: |-
+      Usage:
+      /homes - General purpose command
+      /homes page <number> - View page
+  sethome:
+    permission: sweethome.home
+    usage: |-
+      Usage:
+      /sethome - Set default home
+      /sethome <name> - Set named home
+  invitehome:
+    permission: sweethome.home
+    usage: |-
+      Usage:
+      /invitehome <player> - Invite to your default home
+      /invitehome * - Invite public to your default home
+      /invitehome <player> <home> - Invite to named home
+      /invitehome * <home> - Invite public to named home
+  uninvitehome:
+    permission: sweethome.home
+    usage: |-
+      Usage:
+      /uninvitehome <player> - Uninvite from default home
+      /uninvitehome * - Uninvite public from default home
+      /uninvitehome <player> <home> - Uninvite from named home
+      /uninvitehome * <home> - Uninvite public from named home
+  homes:
+    permission: sweethome.home
+  listhomes:
+    permission: sweethome.home
+    usage: |-
+      Usage:
+      /listhomes - List your homes
+  listinvites:
+    usage: |-
+      Usage:
+      /listinvites - List your home invites
+    permission: sweethome.home
+  deletehome:
+    usage: |-
+      Usage:
+      /deletehome <name> - Delete a named home
+    aliases: [ delhome ]
+    permission: sweethome.home
+  homeadmin:
+    usage: |-
+      /homeadmin reload - Reload config files
+      /homeadmin migrate - Do NOT use!
+    permission: sweethome.homeadmin
+permissions:
+  sweethome.home:
+    description: use normal player commands
+    default: op
+  sweethome.homeadmin:
+    description: use /homeadmin
+    default: op
+  sweethome.useanyhome:
+    description: "Use anyone's home"
+    default: op
