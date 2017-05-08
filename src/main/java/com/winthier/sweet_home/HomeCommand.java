@@ -85,8 +85,10 @@ public final class HomeCommand implements TabExecutor {
             }
             if (!home.getVisitors().contains(player.getUniqueId())) {
                 home.getVisitors().add(player.getUniqueId());
-                plugin.saveHomes();
+                plugin.setDirty(true);
             }
+            home.setUsageCount(home.getUsageCount() + 1);
+            plugin.setDirty(true);
         }
         if (!home.getDescription().isEmpty()) {
             Msg.raw(player, "",

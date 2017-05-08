@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,6 +22,7 @@ public final class SweetHomePlugin extends JavaPlugin implements Listener {
     private List<Home> homes;
     private Map<UUID, User> users;
     private final Map<UUID, Session> sessions = new HashMap<>();
+    @Setter private boolean dirty;
 
     @Override
     public void onEnable() {
@@ -39,6 +41,10 @@ public final class SweetHomePlugin extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
         flushCache();
+        if (dirty) {
+            dirty = false;
+            saveHomes();
+        }
     }
 
     void flushCache() {
@@ -60,6 +66,7 @@ public final class SweetHomePlugin extends JavaPlugin implements Listener {
 
     void saveHomes() {
         if (homes == null) return;
+        dirty = false;
         YamlConfiguration config = new YamlConfiguration();
         config.set("homes", homes.stream().map(home -> home.serialize()).collect(Collectors.toList()));
         try {

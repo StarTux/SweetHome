@@ -33,8 +33,9 @@ public final class HomesCommand implements TabExecutor {
             } else {
                 Msg.info(player, "You have %d/%d home set.", homes.size(), maxHomes);
             }
+            List<Object> msg = new ArrayList<>();
             for (Home home: homes) {
-                List<Object> msg = new ArrayList<>();
+                msg.clear();
                 String homeName = home.getName().isEmpty() ? "Default" : home.getName();
                 String homeSuffix = home.getName().isEmpty() ? "" : " " + home.getName();
                 String homeSecret = home.getName().isEmpty() ? ":" : home.getName();
@@ -43,6 +44,7 @@ public final class HomesCommand implements TabExecutor {
                                    "&9" + homeName + "\n&r" + "/home" + homeSuffix,
                                    "/home" + homeSuffix + " ",
                                    ChatColor.BLUE, ChatColor.BOLD));
+                if (home.getUsageCount() > 1) msg.add(Msg.format(" &7&o%d visits", home.getUsageCount()));
                 msg.add(" ");
                 msg.add(Msg.button("&r[&aRename&r]",
                                    "/homes rename " + homeSecret,
@@ -108,14 +110,20 @@ public final class HomesCommand implements TabExecutor {
                     Msg.raw(player, "", msg);
                 }
             }
+            msg.clear();
+            msg.add(Msg.button("&r[&bList Invites&r]",
+                               "/listinvites",
+                               "&aList Invites\n&r/listinvites",
+                               "/listinvites "));
             if (maxHomes > homes.size()) {
-                Msg.raw(player, "",
-                        Msg.button("&r[&bSet Home&r]",
+                msg.add(" ");
+                msg.add(Msg.button("&r[&bSet Home&r]",
                                    "/sethome",
                                    "&aSet Home\n&r/sethome",
                                    "/sethome ",
                                    ChatColor.AQUA));
             }
+            Msg.raw(player, "", msg);
         } else if (cmd.equals("page") && args.length == 2) {
             int page;
             try {

@@ -28,6 +28,7 @@ public final class Home {
     private final HashSet<UUID> visitors = new HashSet<>();
     private String description;
     private long creationTime;
+    private long usageCount;
 
     public static final Comparator<Home> NAME_COMPARATOR = new Comparator<Home>() {
             @Override public int compare(Home a, Home b) {
@@ -54,13 +55,13 @@ public final class Home {
         this.pitch = location.getPitch();
         this.yaw = location.getYaw();
         this.creationTime = System.currentTimeMillis();
+        this.description = "";
     }
 
     // Serialization
 
     @SuppressWarnings("unchecked")
     Home(Map map) {
-        if (!map.containsKey("description")) map.put("description", "");
         owner = UUID.fromString((String)map.get("owner"));
         name = (String)map.get("name");
         world = (String)map.get("world");
@@ -74,6 +75,7 @@ public final class Home {
         for (String str: (List<String>)map.get("visitors")) visitors.add(UUID.fromString(str));
         description = (String)map.get("description");
         creationTime = ((Number)map.get("creation_time")).longValue();
+        usageCount = ((Number)map.get("usage_count")).longValue();
     }
 
     Map<String, Object> serialize() {
@@ -92,6 +94,7 @@ public final class Home {
         result.put("visitors", visitors.stream().map(uuid -> uuid.toString()).collect(Collectors.toList()));
         result.put("description", description);
         result.put("creation_time", creationTime);
+        result.put("usage_count", usageCount);
         return result;
     }
 

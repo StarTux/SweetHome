@@ -22,6 +22,11 @@ public class AdminCommand implements CommandExecutor {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        } else if ("save".equals(cmd)) {
+            plugin.saveHomes();
+            plugin.saveUsers();
+            plugin.saveDefaultConfig();
+            sender.sendMessage("Config files saved.");
         } else {
             return false;
         }
