@@ -23,6 +23,8 @@ public final class SweetHomeTest {
             home.getInvites().add(UUID.randomUUID());
             home.getInvites().add(UUID.randomUUID());
             home.getInvites().add(UUID.randomUUID());
+            home.setCreationTime(System.currentTimeMillis());
+            home.setDescription("Test Home");
             Map<?, ?> serialized = home.serialize();
             Home home2 = new Home(serialized);
             Map<?, ?> serialized2 = home2.serialize();

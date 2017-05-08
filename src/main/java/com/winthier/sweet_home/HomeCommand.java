@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -86,6 +87,13 @@ public final class HomeCommand implements TabExecutor {
                 home.getVisitors().add(player.getUniqueId());
                 plugin.saveHomes();
             }
+        }
+        if (!home.getDescription().isEmpty()) {
+            Msg.raw(player, "",
+                    Msg.button(home.getDescription(),
+                               home.getDescription(),
+                               null, null,
+                               ChatColor.ITALIC, ChatColor.GRAY));
         }
         return true;
     }

@@ -56,11 +56,23 @@ public final class Msg {
         consoleCommand("minecraft:title %s actionbar %s", player.getName(), JSONValue.toJSONString(o));
     }
 
-    public static Object button(ChatColor color, String chat, String insertion, String tooltip, String command) {
+    public static Object button(String chat, String insertion, String tooltip, String command, ChatColor... colors) {
         Map<String, Object> map = new HashMap<>();
         map.put("text", format(chat));
-        if (color != null) {
-            map.put("color", color.name().toLowerCase());
+        if (colors != null) {
+            for (ChatColor color: colors) {
+                if (color.isColor()) {
+                    map.put("color", color.name().toLowerCase());
+                } else if (color == ChatColor.BOLD) {
+                    map.put("bold", "true");
+                } else if (color == ChatColor.ITALIC) {
+                    map.put("bold", "italic");
+                } else if (color == ChatColor.UNDERLINE) {
+                    map.put("bold", "underline");
+                } else if (color == ChatColor.STRIKETHROUGH) {
+                    map.put("bold", "strikethrough");
+                }
+            }
         }
         if (insertion != null) {
             map.put("insertion", insertion);
@@ -78,14 +90,6 @@ public final class Msg {
             hoverEvent.put("value", format(tooltip));
         }
         return map;
-    }
-
-    public static Object button(ChatColor color, String chat, String tooltip, String command) {
-        return button(color, chat, null, tooltip, command);
-    }
-
-    public static Object button(String chat, String tooltip, String command) {
-        return button(ChatColor.WHITE, chat, null, tooltip, command);
     }
 
     public static String camelCase(String msg) {

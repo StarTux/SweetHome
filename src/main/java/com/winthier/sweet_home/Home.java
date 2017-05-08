@@ -26,6 +26,7 @@ public final class Home {
     private boolean publicInvite;
     private final HashSet<UUID> invites = new HashSet<>();
     private final HashSet<UUID> visitors = new HashSet<>();
+    private String description;
     private long creationTime;
 
     public static final Comparator<Home> NAME_COMPARATOR = new Comparator<Home>() {
@@ -39,7 +40,9 @@ public final class Home {
             }
         };
 
-    Home() { }
+    Home() {
+        description = "";
+    }
 
     Home(OfflinePlayer owner, String name, Location location) {
         this.owner = owner.getUniqueId();
@@ -56,7 +59,8 @@ public final class Home {
     // Serialization
 
     @SuppressWarnings("unchecked")
-    Home(Map<?, ?> map) {
+    Home(Map map) {
+        if (!map.containsKey("description")) map.put("description", "");
         owner = UUID.fromString((String)map.get("owner"));
         name = (String)map.get("name");
         world = (String)map.get("world");
@@ -68,6 +72,7 @@ public final class Home {
         publicInvite = map.get("public") == Boolean.TRUE;
         for (String str: (List<String>)map.get("invites")) invites.add(UUID.fromString(str));
         for (String str: (List<String>)map.get("visitors")) visitors.add(UUID.fromString(str));
+        description = (String)map.get("description");
         creationTime = ((Number)map.get("creation_time")).longValue();
     }
 
@@ -85,6 +90,7 @@ public final class Home {
         if (publicInvite) result.put("public", true);
         result.put("invites", invites.stream().map(uuid -> uuid.toString()).collect(Collectors.toList()));
         result.put("visitors", visitors.stream().map(uuid -> uuid.toString()).collect(Collectors.toList()));
+        result.put("description", description);
         result.put("creation_time", creationTime);
         return result;
     }

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -87,17 +86,17 @@ public final class InviteHomeCommand implements TabExecutor {
                     if (target != null) {
                         String canonical = home.getCanonicalName();
                         if (home.getName().isEmpty()) {
-                            Msg.raw(target, Msg.button(ChatColor.WHITE,
-                                                       player.getName() + " invited you to their home. Click here to visit!",
+                            Msg.raw(target, Msg.button(player.getName() + " invited you to their home. Click here to visit!",
                                                        "/home " + canonical,
                                                        "&9/home " + canonical,
-                                                       "/home " + canonical));
+                                                       "/home " + canonical,
+                                                       ChatColor.WHITE));
                         } else {
-                            Msg.raw(target, Msg.button(ChatColor.WHITE,
-                                                       player.getName() + " invited you to their home &9" + home.getName() + "&r. Click here to visit!",
+                            Msg.raw(target, Msg.button(player.getName() + " invited you to their home &9" + home.getName() + "&r. Click here to visit!",
                                                        "/home " + canonical,
                                                        "&9/home " + canonical,
-                                                       "/home " + canonical));
+                                                       "/home " + canonical,
+                                                       ChatColor.WHITE));
                         }
                     }
                 }

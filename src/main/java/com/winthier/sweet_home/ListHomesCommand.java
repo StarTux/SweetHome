@@ -41,16 +41,28 @@ public final class ListHomesCommand implements CommandExecutor {
         Collections.sort(ownedHomes, Home.NAME_COMPARATOR);
         int maxHomes = plugin.getUser(player.getUniqueId()).getMaximumHomes(plugin, player);
         if (maxHomes != 1) {
-            msg.add(Msg.button(ChatColor.WHITE, "You have &9" + ownedHomes.size() + "&r/&9" + maxHomes + "&r homes:", null, null, null));
+            msg.add(Msg.button("You have &9" + ownedHomes.size() + "&r/&9" + maxHomes + "&r homes:",
+                               null, null, null,
+                               ChatColor.ITALIC));
         } else {
-            msg.add(Msg.button(ChatColor.WHITE, "You have &9" + ownedHomes.size() + "&r/&9" + maxHomes + "&r home:", null, null, null));
+            msg.add(Msg.button("You have &9" + ownedHomes.size() + "&r/&9" + maxHomes + "&r home:",
+                               null, null, null,
+                               ChatColor.ITALIC));
         }
         for (Home home: ownedHomes) {
             msg.add(" ");
             if (home.getName().isEmpty()) {
-                msg.add(Msg.button(ChatColor.BLUE, "&r[&9Default&r]", "/home", "&9Default home\n&r/home", "/home"));
+                msg.add(Msg.button("&r[&9Default&r]",
+                                   "/home",
+                                   "&9Default home\n&r/home",
+                                   "/home",
+                                   ChatColor.BLUE));
             } else {
-                msg.add(Msg.button(ChatColor.AQUA, "&r[&b" + home.getName() + "&r]", "/home " + home.getName(), "&b" + home.getName() + "\n&r/home " + home.getName(), "/home " + home.getName()));
+                msg.add(Msg.button("&r[&b" + home.getName() + "&r]",
+                                   "/home " + home.getName(),
+                                   "&b" + home.getName() + "\n&r/home " + home.getName(),
+                                   "/home " + home.getName(),
+                                   ChatColor.AQUA));
             }
         }
         Msg.raw(player, msg);

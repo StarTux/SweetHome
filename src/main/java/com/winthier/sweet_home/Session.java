@@ -26,12 +26,20 @@ final class Session {
         if (page > 1) {
             msg.add(" ");
             int nextPage = page - 1;
-            msg.add(Msg.button(ChatColor.GREEN, "&r[&aPrev&r]", null, "&aPrevious page\n&r/homes page " + nextPage, "/homes page " + nextPage));
+            msg.add(Msg.button("&r[&aPrev&r]",
+                               "/homes page " + nextPage,
+                               "&aPrevious page\n&r/homes page " + nextPage,
+                               "/homes page " + nextPage,
+                               ChatColor.GREEN));
         }
         if (page < plugin.getSession(player).getPages().size()) {
             msg.add(" ");
             int nextPage = page + 1;
-            msg.add(Msg.button(ChatColor.GREEN, "&r[&aNext&r]", null, "&aNext page\n&r/homes page " + nextPage, "/homes page " + nextPage));
+            msg.add(Msg.button("&r[&aNext&r]",
+                               "/homes page " + nextPage,
+                               "&aNext page\n&r/homes page " + nextPage,
+                               "/homes page " + nextPage,
+                               ChatColor.GREEN));
         }
         if (!msg.isEmpty()) Msg.raw(player, msg);
     }
