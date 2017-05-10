@@ -25,7 +25,7 @@ public final class SetHomeCommand implements CommandExecutor {
             return true;
         }
         if (args.length > 1) return false;
-        if (plugin.getConfig().getStringList("BlacklistedWorlds").contains(player.getWorld().getName())) {
+        if (!plugin.getConfig().getStringList("Worlds").contains(player.getWorld().getName())) {
             Msg.warn(player, "You cannot set a home in this world!");
             return true;
         }

@@ -3,8 +3,6 @@ DefaultHomes: 0
 AdditionalHomes:
   group.friendly: 1
   group.member: 2
-BlacklistedWorlds:
-- Resource
-- Resource_nether
-- Resource_the_end
-- Clubhouse
+Worlds:
+- world
+- world_nether
