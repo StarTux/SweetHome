@@ -60,6 +60,7 @@ commands:
   homeadmin:
     usage: |-
       /homeadmin reload - Reload config files
+      /homeadmin save - Save config files
       /homeadmin migrate - Do NOT use!
     permission: sweethome.homeadmin
 permissions:

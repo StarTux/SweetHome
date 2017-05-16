@@ -52,7 +52,7 @@ public final class Msg {
     }
 
     public static void sendActionBar(Player player, String msg, Object... args) {
-        Object o = button(null, format(msg, args), null, null, null);
+        Object o = button(format(msg, args), null, null, null);
         consoleCommand("minecraft:title %s actionbar %s", player.getName(), JSONValue.toJSONString(o));
     }
 
