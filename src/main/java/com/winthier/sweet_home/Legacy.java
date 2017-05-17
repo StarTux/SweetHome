@@ -1,8 +1,11 @@
 package com.winthier.sweet_home;
 
-import java.sql.*;
-import java.util.*;
-import lombok.Value;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 final class Legacy {
     private Legacy() { }
