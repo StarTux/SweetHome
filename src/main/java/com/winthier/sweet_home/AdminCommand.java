@@ -15,10 +15,10 @@ public class AdminCommand implements CommandExecutor {
         if ("reload".equals(cmd)) {
             plugin.flushCache();
             sender.sendMessage("Config files reloaded.");
-        } else if ("migrate".equals(cmd)) {
+        } else if ("migrate".equals(cmd) && args.length == 5) {
             sender.sendMessage("Migration. See console...");
             try {
-                Legacy.migrate(plugin, args[1], args[2], args[3]);
+                Legacy.migrate(plugin, args[1], args[2], args[3], args[4]);
             } catch (Exception e) {
                 e.printStackTrace();
             }

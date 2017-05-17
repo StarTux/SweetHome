@@ -61,7 +61,7 @@ commands:
     usage: |-
       /homeadmin reload - Reload config files
       /homeadmin save - Save config files
-      /homeadmin migrate - Do NOT use!
+      /homeadmin migrate db usr pwd svr - Do NOT use!
     permission: sweethome.homeadmin
 permissions:
   sweethome.home:

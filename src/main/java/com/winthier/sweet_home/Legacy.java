@@ -10,13 +10,24 @@ import java.util.UUID;
 final class Legacy {
     private Legacy() { }
 
-    static void migrate(SweetHomePlugin plugin, String database, String user, String password) throws Exception {
+    static void migrate(SweetHomePlugin plugin, String database, String user, String password, String serverName) throws Exception {
         Class.forName("com.mysql.jdbc.Driver");
         String url = "jdbc:mysql://127.0.0.1:3306/" + database;
         Connection connection = DriverManager.getConnection(url, user, password);
+        // Server
+        ResultSet result = connection.createStatement().executeQuery("SELECT * FROM `servers`");
+        Map<String, Integer> servers = new HashMap<>();
+        while (result.next()) {
+            servers.put(result.getString("name"), result.getInt("id"));
+        }
+        if (!servers.containsKey(serverName)) {
+            System.out.println("Server not found: " + serverName);
+            return;
+        }
+        int serverId = servers.get(serverName);
         // Players
         Map<Integer, UUID> players = new HashMap<>();
-        ResultSet result = connection.createStatement().executeQuery("SELECT * FROM `players` WHERE `server_id` = 1");
+        result = connection.createStatement().executeQuery("SELECT * FROM `players` WHERE `server_id` = " + serverId);
         while (result.next()) {
             players.put(result.getInt("id"), UUID.fromString(result.getString("uuid")));
         }
@@ -78,10 +89,8 @@ final class Legacy {
             finishedInvites += 1;
         }
         System.out.println("" + finishedInvites + "/" + totalInvites + " invites found.");
-        for (Home home: homes.values()) {
-            plugin.getHomes().add(home);
-            plugin.saveHomes();
-        }
+        for (Home home: homes.values()) plugin.getHomes().add(home);
+        plugin.saveHomes();
         System.out.println("Migration complete. Total home count: " + plugin.getHomes().size());
     }
 }
