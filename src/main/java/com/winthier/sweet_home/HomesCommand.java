@@ -174,6 +174,10 @@ public final class HomesCommand implements TabExecutor {
             String newName;
             if (args.length >= 3) {
                 newName = args[2];
+                if (!newName.matches("[a-zA-Z0-9-_]{0,32}")) {
+                    Msg.warn(player, "Invalid home name: %s", newName);
+                    return true;
+                }
             } else {
                 newName = "";
             }
